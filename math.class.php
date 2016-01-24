@@ -4,41 +4,41 @@ class math {
  * Класс для поразрядного сложения чисел
  * @autor Сергей Медведев (m304so@yandex.ru)
  */
-	
-	// Строка, содержащая инвертированный результат сложения
-	private static $result = '';
-	
-	public static function sum ($array) {
-		$buffer = 0; // Буффер для вычислений
+    
+    // Строка, содержащая инвертированный результат сложения
+    private static $result = '';
+    
+    public static function sum ($array) {
+        $buffer = 0; // Буффер для вычислений
 
-		foreach($array as $key => $value) {
-			if (strlen($value) === 1){
-				$buffer += $value;
-				unset($array[$key]);
-			} else {
-				$buffer += substr($value, -1);
-				if (substr($value, 0, -1) > 0) {
-					$array[$key] = substr($value, 0, -1);
-				}
-			}
-		}
-		
-		if ($buffer > 9) {
-			self::$result .= $buffer%10;
-			array_push($array, intval($buffer/10));
-		} else {
-			self::$result .= $buffer;
-		}
-		
-		// Если остались необработанные числа,
-		// рекурсивный вызов функции сложения:
-		if (!empty($array)) {
-			self::sum($array);
-		}
-		
-		// Возврат конечного результата
-		return strrev(self::$result);
-	}
+        foreach($array as $key => $value) {
+            if (strlen($value) === 1){
+                $buffer += $value;
+                unset($array[$key]);
+            } else {
+                $buffer += substr($value, -1);
+                if (substr($value, 0, -1) > 0) {
+                    $array[$key] = substr($value, 0, -1);
+                }
+            }
+        }
+        
+        if ($buffer > 9) {
+            self::$result .= $buffer%10;
+            array_push($array, intval($buffer/10));
+        } else {
+            self::$result .= $buffer;
+        }
+        
+        // Если остались необработанные числа,
+        // рекурсивный вызов функции сложения:
+        if (!empty($array)) {
+            self::sum($array);
+        }
+        
+        // Возврат конечного результата
+        return strrev(self::$result);
+    }
 }
 
 // Исходные слагаемые
